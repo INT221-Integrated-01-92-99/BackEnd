@@ -1,12 +1,19 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Color {
-
+  @Id
   private long idColor;
   private String colorName;
   private String colorCode;
-
+  @JsonBackReference
+  @OneToMany(mappedBy = "color")
+  private List<Item> itemList;
 
   public long getIdColor() {
     return idColor;
@@ -34,4 +41,11 @@ public class Color {
     this.colorCode = colorCode;
   }
 
+  public List<Item> getItemList() {
+    return itemList;
+  }
+
+  public void setItemList(List<Item> itemList) {
+    this.itemList = itemList;
+  }
 }

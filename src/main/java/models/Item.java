@@ -1,12 +1,21 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class Item {
-
+  @Id
   private long idItem;
-  private long idColor;
-  private long idPro;
-
+  @JsonBackReference
+  @ManyToOne
+  @JoinColumn(name="idColor")
+  private Color color;
+  @ManyToOne
+  @JoinColumn(name="idPro")
+  private Product product;
 
   public long getIdItem() {
     return idItem;
@@ -16,22 +25,19 @@ public class Item {
     this.idItem = idItem;
   }
 
-
-  public long getIdColor() {
-    return idColor;
+  public Color getColor() {
+    return color;
   }
 
-  public void setIdColor(long idColor) {
-    this.idColor = idColor;
+  public void setColor(Color color) {
+    this.color = color;
   }
 
-
-  public long getIdPro() {
-    return idPro;
+  public Product getProduct() {
+    return product;
   }
 
-  public void setIdPro(long idPro) {
-    this.idPro = idPro;
+  public void setProduct(Product product) {
+    this.product = product;
   }
-
 }

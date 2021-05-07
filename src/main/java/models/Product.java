@@ -1,16 +1,23 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.*;
+import java.util.List;
+@Entity
 public class Product {
-
+  @Id
   private long idPro;
   private String proName;
   private String proDescript;
   private double proPrice;
   private java.sql.Date proMfd;
   private String proPathImg;
-  private long idBrand;
-
+  @ManyToOne
+  @JoinColumn(name = "idBrand")
+  private Brand brand;
+  @OneToMany(mappedBy = "Product")
+  private List<Item> Item;
 
   public long getIdPro() {
     return idPro;
@@ -65,13 +72,19 @@ public class Product {
     this.proPathImg = proPathImg;
   }
 
-
-  public long getIdBrand() {
-    return idBrand;
+  public Brand getBrand() {
+    return brand;
   }
 
-  public void setIdBrand(long idBrand) {
-    this.idBrand = idBrand;
+  public void setBrand(Brand brand) {
+    this.brand = brand;
   }
 
+  public List<models.Item> getItem() {
+    return Item;
+  }
+
+  public void setItem(List<models.Item> item) {
+    Item = item;
+  }
 }
